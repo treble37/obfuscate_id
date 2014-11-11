@@ -1,5 +1,7 @@
 require 'rubygems'
 require 'spork'
+require 'pry'
+
 #uncomment the following line to use spork with the debugger
 #require 'spork/ext/ruby-debug'
 
@@ -13,6 +15,10 @@ Spork.prefork do
   # in spec/support/ and its subdirectories.
   Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
 
+  # # Checks for pending migrations before tests are run.
+  # # # If you are not using ActiveRecord, you can remove this line.
+  ActiveRecord::Migration.maintain_test_schema!
+  
   RSpec.configure do |config|
     # ## Mock Framework
     #
